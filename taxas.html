@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="assets/css/login.css" rel="stylesheet" />
+  <title>Taxas de cartão</title>
+
+  <script>
+    function tarifaCartao(cartao) {
+      let valor = document.getElementById("valor");
+      let bandeiras = [
+        {
+          bandeira: "visa",
+          taxas: [1.44, 2.89, 4.44, 5.05, 5.66, 6.26, 6.85, 8.01, 8.59, 9.17, 9.74, 10.31, 10.87],
+        },
+        {
+          bandeira: "elo",
+          taxas: [2.44, 4.65, 5.61, 6.22, 6.82, 7.41, 8.0, 9.05, 9.63, 10.20, 10.76, 11.33, 11.88],
+        },
+        {
+          bandeira: "hiper",
+          taxas: [0.00, 3.94, 5.34, 5.95, 6.55, 7.14, 7.73, 8.79, 9.37, 9.94, 10.51, 11.08, 11.63],
+        },
+      ];
+      let taxasBandeira = bandeiras.filter((obj) => obj.bandeira === cartao).map((obj) => obj.taxas)[0];
+      let table = taxasBandeira.map((taxa, indice) => {
+        let tipo = ["Debito", "1x", "2x", "3x", "4x", "5x", "6x", "7x", "8X", "9X", "10X", "11X", "12X"];
+        let resultado = (100 * valor.value) / (100 - taxa);
+        let valortaxa = resultado - valor.value;
+        return `<tr>
+          <th>${tipo[indice] + " " + taxa + "%"}</th>
+          <td>${"R$ " + resultado.toFixed(2)}</td>
+          <td>${"R$ " + valortaxa.toFixed(2)}</td>
+          </tr>`;
+      });
+
+      document.querySelector("#tabela tbody").innerHTML = table.join("");
+
+    }
+  </script>
+</head>
+
+<body>
+  <div class="modal modal-signin position-static d-block bg-secondary" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document ">
+      <div class="modal-content rounded-2 shadow">
+        <div class="row border-bottom-0 mx-1">
+          <h2 class="fw-bold text-center">Taxas de Cartão</h2>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" onclick="tarifaCartao('visa')" class="btn btn-secondary">
+              Visa Master
+            </button>
+            <button type="button" onclick="tarifaCartao('elo')" class="btn btn-secondary">
+              Elo
+            </button>
+            <button type="button" onclick="tarifaCartao('hiper')" class="btn btn-secondary">
+              Hipercard Hiper
+            </button>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">R$</span>
+            <input type="text" id="valor" class="form-control" aria-label="Amount (to the nearest dollar)" />
+            <span class="input-group-text">.00</span>
+          </div>
+          <div>
+            <table class="table" id="tabela">
+              <thead>
+                <tr>
+                  <th scope="col">Taxa</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Valor da taxa</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
