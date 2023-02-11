@@ -16,16 +16,13 @@
       let bandeiras = [
         {
           bandeira: "visa",
-          taxas: [1.44, 2.89, 4.44, 5.05, 5.66, 6.26, 6.85, 8.01, 8.59, 9.17, 9.74, 10.31, 10.87],
+          taxas: [1.38, 3.16, 5.40,6.13, 6.86, 7.58, 8.29, 9.00, 9.70, 10.39, 11.07, 11.75, 12.41],
         },
         {
           bandeira: "elo",
-          taxas: [2.44, 4.65, 5.61, 6.22, 6.82, 7.41, 8.0, 9.05, 9.63, 10.20, 10.76, 11.33, 11.88],
+          taxas: [2.58, 4.91, 6.47, 7.20, 7.92, 8.63, 9.33, 10.03, 10.72, 11.41, 12.08, 12.75, 13.41],
         },
-        {
-          bandeira: "hiper",
-          taxas: [0.00, 3.94, 5.34, 5.95, 6.55, 7.14, 7.73, 8.79, 9.37, 9.94, 10.51, 11.08, 11.63],
-        },
+       
       ];
       let taxasBandeira = bandeiras.filter((obj) => obj.bandeira === cartao).map((obj) => obj.taxas)[0];
       let table = taxasBandeira.map((taxa, indice) => {
@@ -56,11 +53,9 @@
               Visa Master
             </button>
             <button type="button" onclick="tarifaCartao('elo')" class="btn btn-secondary">
-              Elo
+              Elo Hipercard Hiper
             </button>
-            <button type="button" onclick="tarifaCartao('hiper')" class="btn btn-secondary">
-              Hipercard Hiper
-            </button>
+           
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">R$</span>
